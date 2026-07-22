@@ -4,7 +4,7 @@
 
 import { catName, statusMeta } from "../lib/catalog.ts";
 import { money } from "../lib/format.ts";
-import { phBg, phIconCol } from "../lib/placeholders.ts";
+import { hexToRgba } from "../lib/placeholders.ts";
 import {
   defaultSel,
   unitPrice,
@@ -17,6 +17,7 @@ import { Checkbox } from "../components/Checkbox.tsx";
 import { Icon } from "../components/Icon.tsx";
 import { OptionPicker } from "../components/OptionPicker.tsx";
 import { ProductCard } from "../components/ProductCard.tsx";
+import { ProductImage } from "../components/ProductImage.tsx";
 import { ReviewsModule } from "../components/ReviewsModule.tsx";
 import { StarRating } from "../components/StarRating.tsx";
 
@@ -30,7 +31,6 @@ const TRUST = [
 ];
 
 export function Product() {
-  const theme = useStore((s) => s.theme);
   const index = useStore((s) => s.index);
   const products = useStore((s) => s.products);
   const cats = useStore((s) => s.cats);
@@ -223,25 +223,11 @@ export function Product() {
               borderRadius: "20px",
               overflow: "hidden",
               border: "1px solid var(--border)",
-              background: phBg(mainTint, theme, colorOpt ? "158deg" : ANGLES[gi]),
+              background: hexToRgba(mainTint, 0.15),
               boxShadow: "var(--shadow)",
             }}
           >
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: phIconCol(mainTint, theme),
-                transform: "rotate(" + (colorOpt ? 0 : ROTS[gi]) + "deg)",
-                opacity: out ? 0.5 : 1,
-                filter: out ? "grayscale(.5)" : "none",
-              }}
-            >
-              <Icon name={p.icon} size="clamp(104px,20vw,176px)" />
-            </div>
+            <ProductImage src={p.image} alt={p.title} tint={mainTint} dim={out} />
             <span
               style={{
                 position: "absolute",
@@ -279,25 +265,13 @@ export function Product() {
                   borderRadius: "12px",
                   overflow: "hidden",
                   cursor: t.ex ? "pointer" : "not-allowed",
-                  background: phBg(t.tint, theme, t.ang),
+                  background: hexToRgba(t.tint, 0.15),
                   border: "2px solid " + (t.active ? "var(--accent)" : "transparent"),
                   opacity: t.ex ? (t.active ? 1 : 0.72) : 0.32,
                   padding: 0,
                 }}
               >
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: phIconCol(t.tint, theme),
-                    transform: "rotate(" + t.rot + "deg)",
-                  }}
-                >
-                  <Icon name={p.icon} size={30} />
-                </div>
+                <ProductImage src={p.image} alt={p.title} tint={t.tint} />
               </button>
             ))}
           </div>
@@ -943,25 +917,15 @@ export function Product() {
                       width: "82px",
                       height: "82px",
                       borderRadius: "14px",
-                      background: phBg(b.tint, theme),
+                      overflow: "hidden",
+                      background: hexToRgba(b.tint, 0.15),
                       border: "1px solid var(--border)",
                       flexShrink: 0,
                       cursor: "pointer",
                       padding: 0,
                     }}
                   >
-                    <span
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: phIconCol(b.tint, theme),
-                      }}
-                    >
-                      <Icon name={b.icon} size={32} />
-                    </span>
+                    <ProductImage src={b.image} alt={b.title} tint={b.tint} />
                   </button>
                   {i < bundleItems.length - 1 && (
                     <Icon

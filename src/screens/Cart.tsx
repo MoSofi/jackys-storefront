@@ -4,7 +4,7 @@
 import { FREE_SHIP } from "../data/demo.ts";
 import { catName } from "../lib/catalog.ts";
 import { money } from "../lib/format.ts";
-import { phBg, phIconCol } from "../lib/placeholders.ts";
+import { hexToRgba } from "../lib/placeholders.ts";
 import {
   cartArr,
   computeTotals,
@@ -13,13 +13,13 @@ import {
 } from "../lib/pricing.ts";
 import { useStore } from "../state/store.ts";
 import { Icon } from "../components/Icon.tsx";
+import { ProductImage } from "../components/ProductImage.tsx";
 import { QtyStepper } from "../components/QtyStepper.tsx";
 
 export function Cart() {
   const cart = useStore((s) => s.cart);
   const index = useStore((s) => s.index);
   const cats = useStore((s) => s.cats);
-  const theme = useStore((s) => s.theme);
   const ship = useStore((s) => s.ship);
   const promoOn = useStore((s) => s.promoOn);
   const promoDraft = useStore((s) => s.promoDraft);
@@ -185,7 +185,7 @@ export function Cart() {
                       width: "92px",
                       height: "92px",
                       borderRadius: "14px",
-                      background: phBg(l.p.tint, theme),
+                      background: hexToRgba(l.p.tint, 0.15),
                       border: "1px solid var(--border)",
                       flexShrink: 0,
                       overflow: "hidden",
@@ -193,18 +193,7 @@ export function Cart() {
                       padding: 0,
                     }}
                   >
-                    <span
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: phIconCol(l.p.tint, theme),
-                      }}
-                    >
-                      <Icon name={l.p.icon} size={36} />
-                    </span>
+                    <ProductImage src={l.p.image} alt={l.p.title} tint={l.p.tint} />
                   </button>
                   <div
                     style={{

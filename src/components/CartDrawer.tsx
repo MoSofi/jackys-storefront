@@ -2,17 +2,17 @@
 
 import { FREE_SHIP } from "../data/demo.ts";
 import { money } from "../lib/format.ts";
-import { phBg, phIconCol } from "../lib/placeholders.ts";
+import { hexToRgba } from "../lib/placeholders.ts";
 import { cartArr, count as countLines, subtotalOf } from "../lib/pricing.ts";
 import { useStore } from "../state/store.ts";
 import { Icon } from "./Icon.tsx";
+import { ProductImage } from "./ProductImage.tsx";
 import { QtyStepper } from "./QtyStepper.tsx";
 
 export function CartDrawer() {
   const drawer = useStore((s) => s.drawer);
   const cart = useStore((s) => s.cart);
   const index = useStore((s) => s.index);
-  const theme = useStore((s) => s.theme);
   const closeDrawer = useStore((s) => s.closeDrawer);
   const goCat = useStore((s) => s.goCat);
   const inc = useStore((s) => s.inc);
@@ -193,25 +193,14 @@ export function CartDrawer() {
                       width: "66px",
                       height: "66px",
                       borderRadius: "13px",
-                      background: phBg(l.p.tint, theme),
+                      background: hexToRgba(l.p.tint, 0.15),
                       flexShrink: 0,
                       position: "relative",
                       overflow: "hidden",
                       border: "1px solid var(--border)",
                     }}
                   >
-                    <div
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: phIconCol(l.p.tint, theme),
-                      }}
-                    >
-                      <Icon name={l.p.icon} size={26} />
-                    </div>
+                    <ProductImage src={l.p.image} alt={l.p.title} tint={l.p.tint} />
                   </div>
                   <div
                     style={{

@@ -3,10 +3,11 @@
 
 import type { Order, OrderStatus } from "../data/types.ts";
 import { money } from "../lib/format.ts";
-import { phBg, phIconCol } from "../lib/placeholders.ts";
+import { hexToRgba } from "../lib/placeholders.ts";
 import { confTotals, normItems } from "../lib/pricing.ts";
 import { useStore } from "../state/store.ts";
 import { Icon } from "../components/Icon.tsx";
+import { ProductImage } from "../components/ProductImage.tsx";
 
 const STATUS_META: Record<OrderStatus, [string, string, string, string]> = {
   pending: ["Pending", "clock", "var(--warn)", "var(--warn-soft)"],
@@ -16,7 +17,6 @@ const STATUS_META: Record<OrderStatus, [string, string, string, string]> = {
 };
 
 export function Account() {
-  const theme = useStore((s) => s.theme);
   const index = useStore((s) => s.index);
   const seedOrders = useStore((s) => s.seedOrders);
   const lastOrder = useStore((s) => s.lastOrder);
@@ -159,25 +159,14 @@ export function Account() {
                         width: "44px",
                         height: "44px",
                         borderRadius: "11px",
-                        background: phBg(p.tint, theme),
+                        background: hexToRgba(p.tint, 0.15),
                         border: "1px solid var(--border)",
                         flexShrink: 0,
                         position: "relative",
                         overflow: "hidden",
                       }}
                     >
-                      <div
-                        style={{
-                          position: "absolute",
-                          inset: 0,
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          color: phIconCol(p.tint, theme),
-                        }}
-                      >
-                        <Icon name={p.icon} size={19} />
-                      </div>
+                      <ProductImage src={p.image} alt={p.title} tint={p.tint} />
                     </div>
                   ))}
                 </div>

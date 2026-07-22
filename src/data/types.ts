@@ -48,10 +48,12 @@ export interface Product {
   sku: string;
   cat: string;
   status: Stock;
-  /** lucide icon name used for the procedural placeholder art. */
+  /** lucide icon name — kept as a compact fallback glyph. */
   icon: string;
-  /** tint hex used to generate the placeholder gradient. */
+  /** tint hex — shown as a subtle background behind the image while it loads. */
   tint: string;
+  /** Product photo URL (real imagery; see demo.ts). */
+  image: string;
   feat?: boolean;
   blurb: string;
   desc: string;

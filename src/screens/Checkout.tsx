@@ -5,12 +5,13 @@
 import { FREE_SHIP, SHIP_EXPRESS, SHIP_OVERNIGHT } from "../data/demo.ts";
 import type { ShipMethod } from "../data/types.ts";
 import { money } from "../lib/format.ts";
-import { phBg, phIconCol } from "../lib/placeholders.ts";
+import { hexToRgba } from "../lib/placeholders.ts";
 import { cartArr, computeTotals, subtotalOf } from "../lib/pricing.ts";
 import type { Form } from "../state/store.ts";
 import { useStore } from "../state/store.ts";
 import { Checkbox } from "../components/Checkbox.tsx";
 import { Icon } from "../components/Icon.tsx";
+import { ProductImage } from "../components/ProductImage.tsx";
 
 const STEP_LABELS = ["Contact", "Shipping", "Delivery", "Payment"];
 const NEXT_LABELS = [
@@ -45,7 +46,6 @@ export function Checkout() {
     billingSame,
     cart,
     index,
-    theme,
   } = st;
 
   const lines = cartArr(cart, index);
@@ -796,25 +796,17 @@ export function Checkout() {
                       width: "56px",
                       height: "56px",
                       borderRadius: "12px",
-                      background: phBg(l.p.tint, theme),
+                      background: hexToRgba(l.p.tint, 0.15),
                       border: "1px solid var(--border)",
                       flexShrink: 0,
                     }}
                   >
-                    <div
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: phIconCol(l.p.tint, theme),
-                        borderRadius: "12px",
-                        overflow: "hidden",
-                      }}
-                    >
-                      <Icon name={l.p.icon} size={22} />
-                    </div>
+                    <ProductImage
+                      src={l.p.image}
+                      alt={l.p.title}
+                      tint={l.p.tint}
+                      style={{ borderRadius: "12px" }}
+                    />
                     <span
                       style={{
                         position: "absolute",

@@ -22,6 +22,13 @@ export const SHIP_STANDARD = 6;
 /** Amber used for star glyphs — a brand/demo literal, not a theme token. */
 export const STAR_COLOR = "#f5a623";
 
+/** Build a verified Unsplash image URL from a photo id. */
+const img = (id: string): string =>
+  `https://images.unsplash.com/photo-${id}?w=800&q=75&auto=format&fit=crop`;
+
+/** Home lifestyle hero photo. */
+export const HERO_IMAGE = img("1472851294608-062f824d29cc");
+
 export const CATS: Category[] = [
   { slug: "gear", name: "Gear", icon: "plug-zap" },
   { slug: "apparel", name: "Apparel", icon: "shirt" },
@@ -32,6 +39,7 @@ export const CATS: Category[] = [
 export const PRODUCTS: Product[] = [
   {
     id: "kb-k2",
+    image: img("1587829741301-dc798b83add3"),
     title: "Ergo Keyboard K2",
     price: 129,
     sku: "JKY-KB-K2",
@@ -68,6 +76,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "stand-al",
+    image: img("1527443224154-c4a3942d3acf"),
     title: "Aluminum Laptop Stand",
     price: 59,
     sku: "JKY-ST-AL",
@@ -86,6 +95,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "deskmat-xl",
+    image: img("1593642532744-d377ab507dc8"),
     title: "Desk Mat XL",
     price: 49,
     sku: "JKY-DM-XL",
@@ -105,6 +115,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "mouse-m1",
+    image: img("1527814050087-3793815479db"),
     title: "Wireless Mouse M1",
     price: 45,
     sku: "JKY-MO-M1",
@@ -123,6 +134,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "trail-gtx",
+    image: img("1542291026-7eec264c27ff"),
     title: "Trail Runner GTX",
     price: 189,
     sku: "JKY-SH-GTX",
@@ -163,6 +175,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "hoodie-tf",
+    image: img("1556905055-8f358a7a47b2"),
     title: "Tech Fleece Hoodie",
     price: 89,
     sku: "JKY-HD-TF",
@@ -218,6 +231,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "beanie-mr",
+    image: img("1576871337622-98d48d1cf531"),
     title: "Merino Beanie",
     price: 34,
     sku: "JKY-BN-MR",
@@ -253,6 +267,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "tee-ed",
+    image: img("1521572163474-6864f9cf17ab"),
     title: "Everyday Tee",
     price: 28,
     sku: "JKY-TE-ED",
@@ -306,6 +321,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "socks-w3",
+    image: img("1586350977771-b3b0abd50c82"),
     title: "Wool Socks 3-Pack",
     price: 24,
     sku: "JKY-SK-W3",
@@ -341,6 +357,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "bottle-750",
+    image: img("1602143407151-7111542de6e8"),
     title: "Steel Bottle 750",
     price: 29,
     sku: "JKY-BT-750",
@@ -385,6 +402,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "pourover-cr",
+    image: img("1607681034540-2c46cc71896d"),
     title: "Ceramic Pour-Over",
     price: 54,
     sku: "JKY-PO-CR",
@@ -403,6 +421,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "throw-ln",
+    image: img("1600369671236-e74521d4b6ad"),
     title: "Linen Throw",
     price: 79,
     sku: "JKY-TH-LN",
@@ -421,6 +440,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "candle-04",
+    image: img("1602874801007-bd458bb1b8b6"),
     title: "Soy Candle No.4",
     price: 32,
     sku: "JKY-CN-04",
@@ -439,6 +459,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "tote-l",
+    image: img("1591561954557-26941169b49e"),
     title: "Canvas Tote L",
     price: 39,
     sku: "JKY-TO-L",
@@ -485,6 +506,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "wallet-lc",
+    image: img("1627123424574-724758594e93"),
     title: "Leather Card Wallet",
     price: 45,
     sku: "JKY-WL-LC",
@@ -526,6 +548,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "cable-rk",
+    image: img("1558618666-fcd25c85cd64"),
     title: "Cable Roll Kit",
     price: 19,
     sku: "JKY-CB-RK",

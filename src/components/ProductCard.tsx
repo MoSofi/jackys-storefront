@@ -3,22 +3,18 @@
 import type { Product } from "../data/types.ts";
 import { catName, statusMeta } from "../lib/catalog.ts";
 import { money } from "../lib/format.ts";
-import { phBg, phIconCol } from "../lib/placeholders.ts";
+import { hexToRgba } from "../lib/placeholders.ts";
 import { ratingFor } from "../lib/ratings.ts";
 import { useStore } from "../state/store.ts";
 import { Icon } from "./Icon.tsx";
+import { ProductImage } from "./ProductImage.tsx";
 import { StarRating } from "./StarRating.tsx";
 
 export interface ProductCardProps {
   product: Product;
-  iconSize?: string;
 }
 
-export function ProductCard({
-  product: p,
-  iconSize = "clamp(46px,8vw,60px)",
-}: ProductCardProps) {
-  const theme = useStore((s) => s.theme);
+export function ProductCard({ product: p }: ProductCardProps) {
   const cats = useStore((s) => s.cats);
   const ratings = useStore((s) => s.ratings);
   const userReviews = useStore((s) => s.userReviews);
@@ -48,24 +44,11 @@ export function ProductCard({
         style={{
           position: "relative",
           aspectRatio: "1 / 1",
-          background: phBg(p.tint, theme),
+          background: hexToRgba(p.tint, 0.15),
           overflow: "hidden",
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: phIconCol(p.tint, theme),
-            opacity: out ? 0.5 : 1,
-            filter: out ? "grayscale(.5)" : "none",
-          }}
-        >
-          <Icon name={p.icon} size={iconSize} />
-        </div>
+        <ProductImage src={p.image} alt={p.title} tint={p.tint} dim={out} />
         <button
           className="jk-qa"
           onClick={(e) => {

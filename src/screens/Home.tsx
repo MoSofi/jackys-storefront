@@ -1,13 +1,14 @@
 // Home: hero, new-arrivals banner, featured grid, shop-by-category tiles,
 // value-props strip, and the promo banner.
 
-import { FREE_SHIP } from "../data/demo.ts";
+import { FREE_SHIP, HERO_IMAGE } from "../data/demo.ts";
 import { catCount } from "../lib/catalog.ts";
 import { money } from "../lib/format.ts";
-import { phBg, phIconCol } from "../lib/placeholders.ts";
+import { hexToRgba, phBg, phIconCol } from "../lib/placeholders.ts";
 import { useStore } from "../state/store.ts";
 import { Icon } from "../components/Icon.tsx";
 import { ProductCard } from "../components/ProductCard.tsx";
+import { ProductImage } from "../components/ProductImage.tsx";
 
 const CAT_TINTS = ["#6f74c4", "#7d9166", "#b0836a", "#869162"];
 
@@ -198,41 +199,15 @@ export function Home() {
           style={{
             position: "relative",
             minHeight: "300px",
-            background: phBg("#6f74c4", theme),
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            overflow: "hidden",
+            background: hexToRgba("#6f74c4", 0.15),
           }}
         >
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: phIconCol("#6f74c4", theme),
-            }}
-          >
-            <Icon name="tent-tree" size="clamp(80px,14vw,132px)" />
-          </div>
-          <span
-            style={{
-              position: "absolute",
-              bottom: "18px",
-              insetInlineStart: "18px",
-              fontFamily: "'JetBrains Mono',monospace",
-              fontSize: "11px",
-              fontWeight: 600,
-              color: "var(--on-tint)",
-              background: "var(--tint-chip)",
-              padding: "5px 10px",
-              borderRadius: "8px",
-              backdropFilter: "blur(4px)",
-            }}
-          >
-            lifestyle_hero.jpg
-          </span>
+          <ProductImage
+            src={HERO_IMAGE}
+            alt="Jacky's gear, out on location"
+            tint="#6f74c4"
+          />
         </div>
       </section>
 
@@ -382,11 +357,7 @@ export function Home() {
           }}
         >
           {featured.map((p) => (
-            <ProductCard
-              key={p.id}
-              product={p}
-              iconSize="clamp(48px,9vw,62px)"
-            />
+            <ProductCard key={p.id} product={p} />
           ))}
         </div>
       </section>

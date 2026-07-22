@@ -3,10 +3,11 @@
 
 import type { ShipMethod } from "../data/types.ts";
 import { money } from "../lib/format.ts";
-import { phBg, phIconCol } from "../lib/placeholders.ts";
+import { hexToRgba } from "../lib/placeholders.ts";
 import { confTotals, normItems } from "../lib/pricing.ts";
 import { useStore } from "../state/store.ts";
 import { Icon } from "../components/Icon.tsx";
+import { ProductImage } from "../components/ProductImage.tsx";
 
 const METHOD_LABEL: Record<ShipMethod, string> = {
   standard: "Standard shipping",
@@ -20,7 +21,6 @@ const ETA: Record<ShipMethod, string> = {
 };
 
 export function Confirm() {
-  const theme = useStore((s) => s.theme);
   const index = useStore((s) => s.index);
   const lastOrder = useStore((s) => s.lastOrder);
   const goCat = useStore((s) => s.goCat);
@@ -149,25 +149,17 @@ export function Confirm() {
                       width: "58px",
                       height: "58px",
                       borderRadius: "12px",
-                      background: phBg(it.p.tint, theme),
+                      background: hexToRgba(it.p.tint, 0.15),
                       border: "1px solid var(--border)",
                       flexShrink: 0,
                     }}
                   >
-                    <div
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: phIconCol(it.p.tint, theme),
-                        borderRadius: "12px",
-                        overflow: "hidden",
-                      }}
-                    >
-                      <Icon name={it.p.icon} size={24} />
-                    </div>
+                    <ProductImage
+                      src={it.p.image}
+                      alt={it.p.title}
+                      tint={it.p.tint}
+                      style={{ borderRadius: "12px" }}
+                    />
                     <span
                       style={{
                         position: "absolute",
