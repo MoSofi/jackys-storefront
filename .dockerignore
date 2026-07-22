@@ -1,0 +1,8 @@
+node_modules
+dist
+.git
+.github
+.vercel
+.DS_Store
+*.local
+npm-debug.log
